@@ -60,24 +60,28 @@ const ProductCard = ({ pokemonUrl }) => {
     };
 
     fetchIndividualPokemonDetails();
-  }, [pokemonUrl]); // Se ejecuta cada vez que cambia el `productUrl`
+  }, [pokemonUrl]); // Se ejecuta cada vez que cambia el `pokemonUrl`
 
   if (loadingDetails) return <p>Loading product details...</p>;
 
-  console.log(pokemonDetails);
+  //   console.log(pokemonDetails);
+
+  const types = pokemonDetails.types.map((nested) => nested.type.name);
+  const formattedTypes = types.join(", ");
+  console.log(types); // Output: ["Nested 1", "Nested 2"]
 
   return (
-    // TODO: Learn about how to use template string literals
     <div className="pokemon_card">
       <img
         src={pokemonDetails.sprites.front_default}
         alt={pokemonDetails.name}
         className="pokemon_card_image"
       />
-      <h3>
+      <h3 className="pokemon_id_and_name">
         {"#" + pokemonDetails.id}
         {" " + pokemonDetails.name.toUpperCase()}
       </h3>
+      <p className="pokemon_types">{formattedTypes}</p>
     </div>
   );
 };

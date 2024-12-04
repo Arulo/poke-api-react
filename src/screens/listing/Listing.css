@@ -7,7 +7,6 @@
 
 .pokemon_card {
   background-color: #df1818;
-  color: white;
   height: 240px;
   width: 180px;
   border: 1px solid #ccc;
@@ -21,4 +20,17 @@
   width: 80%;
   padding: 18px;
   border: 1px solid #1a1616;
+}
+
+.pokemon_id_and_name {
+  color: white;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.pokemon_types {
+  color: white;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-top: 2px;
 }
