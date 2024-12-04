@@ -1,10 +1,10 @@
 import "./App.css";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <main className="content">
         <p>This is the mock content for the body of the page.</p>
