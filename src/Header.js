@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 
-export default function Header() {
+function Header() {
   return (
     <header className="header">
       <img src="/images/logo.png" alt="Pokeball Logo" className="logo" />
@@ -22,3 +22,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;
