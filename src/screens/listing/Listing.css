@@ -1,0 +1,24 @@
+.pokemon_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.pokemon_card {
+  background-color: #df1818;
+  color: white;
+  height: 240px;
+  width: 180px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.pokemon_card_image {
+  background-color: white;
+  width: 80%;
+  padding: 18px;
+  border: 1px solid #1a1616;
+}
