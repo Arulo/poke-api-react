@@ -64,7 +64,17 @@ const ProductCard = ({ pokemonUrl }) => {
     fetchIndividualPokemonDetails();
   }, [pokemonUrl]); // Se ejecuta cada vez que cambia el `pokemonUrl`
 
-  if (loadingDetails) return <p>Loading Pokemon details...</p>;
+  if (loadingDetails)
+    return (
+      <div className="pokemon_card_loading">
+        <img
+          className="pokeball_spinner"
+          src="/images/spinner.gif"
+          alt="spinner"
+        ></img>
+        <p>Loading...</p>
+      </div>
+    );
 
   // console.log(pokemonDetails)
 

@@ -27,6 +27,37 @@
   text-align: center;
 }
 
+.pokemon_card_loading {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #dfdfdf;
+  background-color: #df1818;
+  opacity: 0.8;
+  background-image: linear-gradient(135deg, #ff1c1c 25%, transparent 25%),
+    linear-gradient(225deg, #ff1c1c 25%, transparent 25%),
+    linear-gradient(45deg, #ff1c1c 25%, transparent 25%),
+    linear-gradient(315deg, #ff1c1c 25%, #df1818 25%);
+  background-position: 24px 0, 24px 0, 0 0, 0 0;
+  background-size: 48px 48px;
+  background-repeat: repeat;
+  height: 240px;
+  width: 180px;
+  border: 2px dashed black;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.pokemon_card_loading > p {
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.pokeball_spinner {
+  max-height: 146px;
+}
+
 .pokemon_card_image {
   background: radial-gradient(circle at 50% 50%, #ffffff, #e7ebf7, #ced6f0);
   width: 80%;
