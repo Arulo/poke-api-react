@@ -6,9 +6,10 @@ const Listing = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Sample Endpoint:  "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
-
     const fetchPokemonList = async () => {
+      // Get only the list of Pokemon from the first endpoint which contains their names and URLs
+      // Sample Endpoint:  "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
+      // For more details refer to: https://pokeapi.co/docs/v2
       try {
         const response = await fetch(
           "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20"
@@ -18,6 +19,7 @@ const Listing = () => {
         }
 
         const data = await response.json();
+        // "results" is the name the API uses to concentrate all the different pokemon entries
         setPokemon(data.results);
       } catch (error) {
         console.error("Error fetching Pokemon List:", error);
@@ -49,9 +51,9 @@ const ProductCard = ({ pokemonUrl }) => {
   useEffect(() => {
     const fetchIndividualPokemonDetails = async () => {
       try {
-        const response = await fetch(pokemonUrl); // Usamos el endpoint del pokemon
+        const response = await fetch(pokemonUrl); // We fetch the individual pokemon endpoint
         const data = await response.json();
-        setIndividualPokemonData(data); // Almacenamos los detalles del pokemon
+        setIndividualPokemonData(data); // Store pokemon details
       } catch (err) {
         console.error("Error fetching Pokemon individual details:", err);
       } finally {
@@ -62,13 +64,14 @@ const ProductCard = ({ pokemonUrl }) => {
     fetchIndividualPokemonDetails();
   }, [pokemonUrl]); // Se ejecuta cada vez que cambia el `pokemonUrl`
 
-  if (loadingDetails) return <p>Loading product details...</p>;
+  if (loadingDetails) return <p>Loading Pokemon details...</p>;
 
-  //   console.log(pokemonDetails);
+  // console.log(pokemonDetails)
 
-  const types = pokemonDetails.types.map((nested) => nested.type.name);
-  const formattedTypes = types.join(", ");
-  console.log(types); // Output: ["Nested 1", "Nested 2"]
+  // Get and Format Pokemon Types, some can have more than one type (types are "fire", "rock", "ground", "fairy", etc)
+  const types = pokemonDetails.types
+    .map((nested) => nested.type.name) // Check object for nested properties and return them in an array
+    .join(", ");
 
   return (
     <div className="pokemon_card">
@@ -79,9 +82,9 @@ const ProductCard = ({ pokemonUrl }) => {
       />
       <h3 className="pokemon_id_and_name">
         {"#" + pokemonDetails.id}
-        {" " + pokemonDetails.name.toUpperCase()}
+        {" " + pokemonDetails.name}
       </h3>
-      <p className="pokemon_types">{formattedTypes}</p>
+      <p className="pokemon_types">{types}</p>
     </div>
   );
 };
