@@ -4,22 +4,20 @@ import "./Listing.css";
 const Listing = () => {
   const [listOfPokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const MAX_OFFSET = 140; // shows up until pokemon #160
 
   useEffect(() => {
     const fetchPokemonList = async () => {
-      // Get only the list of Pokemon from the first endpoint which contains their names and URLs
-      // Sample Endpoint:  "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
-      // For more details refer to: https://pokeapi.co/docs/v2
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20"
+          `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
 
         const data = await response.json();
-        // "results" is the name the API uses to concentrate all the different pokemon entries
         setPokemon(data.results);
       } catch (error) {
         console.error("Error fetching Pokemon List:", error);
@@ -28,18 +26,38 @@ const Listing = () => {
       }
     };
 
+    setLoading(true);
     fetchPokemonList();
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  }, [offset]);
 
   return (
-    <div className="pokemon_list">
-      {listOfPokemon.map((pokemon) => (
-        <ProductCard key={pokemon.name} pokemonUrl={pokemon.url} />
-      ))}
+    <div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <div className="pokemon_list">
+            {listOfPokemon.map((pokemon) => (
+              <ProductCard key={pokemon.name} pokemonUrl={pokemon.url} />
+            ))}
+          </div>
+
+          <div className="pagination_controls">
+            <button className="pagination_button"
+              onClick={() => setOffset(Math.max(offset - 20, 0))}
+              disabled={offset === 0}
+            >
+              PREV
+            </button>
+            <button className="pagination_button"
+              onClick={() => setOffset(offset + 20)}
+              disabled={offset >= MAX_OFFSET}
+            >
+              NEXT
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -62,7 +80,7 @@ const ProductCard = ({ pokemonUrl }) => {
     };
 
     fetchIndividualPokemonDetails();
-  }, [pokemonUrl]); // Se ejecuta cada vez que cambia el `pokemonUrl`
+  }, [pokemonUrl]); // It executes every time the pokemon URL changes
 
   if (loadingDetails)
     return (
