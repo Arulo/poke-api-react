@@ -1,3 +1,15 @@
+.main_wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .main_wrapper {
+    padding: 0 12px;
+  }
+}
+
 .pokemon_list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -25,6 +37,11 @@
   border-radius: 10px;
   padding: 10px;
   text-align: center;
+}
+
+.pokemon_card:hover {
+  transform: scale(1.03);
+  transition: transform 0.2s ease;
 }
 
 .pokemon_card_loading {
@@ -110,4 +127,32 @@
   background-color: #2e2e2e;
   color: #ffffff;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.type_filters{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.type_icon {
+  height: 33px;
+  width: 150px;
+  border-radius:10px;
+  filter: grayscale(100%);
+  transition: filter 0.2s ease;
+}
+
+/* Hover: changes colour */
+.type_filter:hover .type_icon {
+  filter: grayscale(0%);
+}
+
+/* Selected: colour + scale */
+.type_icon_wrapper.selected .type_icon {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
