@@ -1,11 +1,23 @@
 import { useState, useEffect } from "react";
 import "./Listing.css";
+import { POKEMON_TYPES } from "../../../src/data/pokemonTypes";
 
 const Listing = () => {
-  const [listOfPokemon, setPokemon] = useState([]);
+  const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const MAX_OFFSET = 140; // shows up until pokemon #160
+
+
+  const handleTypeChange = (typeName) => {
+    setSelectedTypes(
+      (prev) =>
+        prev.includes(typeName)
+          ? prev.filter((t) => t !== typeName) // remove
+          : [...prev, typeName] // add
+    );
+  };
 
   useEffect(() => {
     const fetchPokemonList = async () => {
@@ -18,7 +30,7 @@ const Listing = () => {
         }
 
         const data = await response.json();
-        setPokemon(data.results);
+        setPokemonList(data.results);
       } catch (error) {
         console.error("Error fetching Pokemon List:", error);
       } finally {
@@ -36,20 +48,37 @@ const Listing = () => {
         <p>Loading...</p>
       ) : (
         <>
+          <div className="type_filters">
+            <h3>Filtrar por tipo:</h3>
+            {POKEMON_TYPES.map((type) => (
+              <label key={type.name} style={{ marginRight: "10px" }}>
+                <input
+                  type="checkbox"
+                  value={type.name}
+                  checked={selectedTypes.includes(type.name)}
+                  onChange={() => handleTypeChange(type.name)}
+                />
+                {type.name}
+              </label>
+            ))}
+          </div>
+
           <div className="pokemon_list">
-            {listOfPokemon.map((pokemon) => (
-              <ProductCard key={pokemon.name} pokemonUrl={pokemon.url} />
+            {pokemonList.map((pokemon) => (
+              <PokemonCard key={pokemon.name} pokemonUrl={pokemon.url} />
             ))}
           </div>
 
           <div className="pagination_controls">
-            <button className="pagination_button"
+            <button
+              className="pagination_button"
               onClick={() => setOffset(Math.max(offset - 20, 0))}
               disabled={offset === 0}
             >
               PREV
             </button>
-            <button className="pagination_button"
+            <button
+              className="pagination_button"
               onClick={() => setOffset(offset + 20)}
               disabled={offset >= MAX_OFFSET}
             >
@@ -62,7 +91,7 @@ const Listing = () => {
   );
 };
 
-const ProductCard = ({ pokemonUrl }) => {
+const PokemonCard = ({ pokemonUrl }) => {
   const [pokemonDetails, setIndividualPokemonData] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(true);
 

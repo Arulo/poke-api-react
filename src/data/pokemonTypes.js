@@ -1,0 +1,20 @@
+export const POKEMON_TYPES = [
+  { id: 1, name: "normal", url: "https://pokeapi.co/api/v2/type/1/", icon: "https://img.pokemondb.net/images/types/normal.png" },
+  { id: 2, name: "fighting", url: "https://pokeapi.co/api/v2/type/2/", icon: "https://img.pokemondb.net/images/types/fighting.png" },
+  { id: 3, name: "flying", url: "https://pokeapi.co/api/v2/type/3/", icon: "https://img.pokemondb.net/images/types/flying.png" },
+  { id: 4, name: "poison", url: "https://pokeapi.co/api/v2/type/4/", icon: "https://img.pokemondb.net/images/types/poison.png" },
+  { id: 5, name: "ground", url: "https://pokeapi.co/api/v2/type/5/", icon: "https://img.pokemondb.net/images/types/ground.png" },
+  { id: 6, name: "rock", url: "https://pokeapi.co/api/v2/type/6/", icon: "https://img.pokemondb.net/images/types/rock.png" },
+  { id: 7, name: "bug", url: "https://pokeapi.co/api/v2/type/7/", icon: "https://img.pokemondb.net/images/types/bug.png" },
+  { id: 8, name: "ghost", url: "https://pokeapi.co/api/v2/type/8/", icon: "https://img.pokemondb.net/images/types/ghost.png" },
+  { id: 9, name: "steel", url: "https://pokeapi.co/api/v2/type/9/", icon: "https://img.pokemondb.net/images/types/steel.png" },
+  { id: 10, name: "fire", url: "https://pokeapi.co/api/v2/type/10/", icon: "https://img.pokemondb.net/images/types/fire.png" },
+  { id: 11, name: "water", url: "https://pokeapi.co/api/v2/type/11/", icon: "https://img.pokemondb.net/images/types/water.png" },
+  { id: 12, name: "grass", url: "https://pokeapi.co/api/v2/type/12/", icon: "https://img.pokemondb.net/images/types/grass.png" },
+  { id: 13, name: "electric", url: "https://pokeapi.co/api/v2/type/13/", icon: "https://img.pokemondb.net/images/types/electric.png" },
+  { id: 14, name: "psychic", url: "https://pokeapi.co/api/v2/type/14/", icon: "https://img.pokemondb.net/images/types/psychic.png" },
+  { id: 15, name: "ice", url: "https://pokeapi.co/api/v2/type/15/", icon: "https://img.pokemondb.net/images/types/ice.png" },
+  { id: 16, name: "dragon", url: "https://pokeapi.co/api/v2/type/16/", icon: "https://img.pokemondb.net/images/types/dragon.png" },
+  { id: 17, name: "dark", url: "https://pokeapi.co/api/v2/type/17/", icon: "https://img.pokemondb.net/images/types/dark.png" },
+  { id: 18, name: "fairy", url: "https://pokeapi.co/api/v2/type/18/", icon: "https://img.pokemondb.net/images/types/fairy.png" }
+];
