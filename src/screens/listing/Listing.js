@@ -89,7 +89,7 @@ const Listing = () => {
 
   return (
     <div className="main_wrapper">
-      <div className="type_filters">
+      <div className="type_filters" data-testid="type_filters">
         {POKEMON_TYPES.map((type) => {
           const isSelected = selectedTypes.includes(type.name);
           return (
@@ -115,7 +115,7 @@ const Listing = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <div className="pokemon_list">
+          <div className="pokemon_list" data-testid="pokemon_list">
             {currentList.map((pokemon) => (
               <PokemonCard key={pokemon.name} pokemonUrl={pokemon.url} />
             ))}
@@ -181,7 +181,7 @@ const PokemonCard = ({ pokemonUrl }) => {
     .join(", ");
 
   return (
-    <div className="pokemon_card">
+    <div className="pokemon_card" data-testid="pokemon_card">
       <img
         src={pokemonDetails.sprites.front_default}
         alt={pokemonDetails.name}
