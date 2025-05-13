@@ -1,13 +1,15 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
+// Skip until I have the API calls mocked
+test.skip('has title', async ({ page }) => {
   await page.goto('');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Poke\-API \- React project for practicing test automation/);
 });
 
-test('has main components', async ({ page }) => {
+// Skip until I have the API calls mocked
+test.skip('has main components', async ({ page }) => {
   await page.goto('');
 
 
