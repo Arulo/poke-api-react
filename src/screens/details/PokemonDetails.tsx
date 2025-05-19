@@ -1,11 +1,15 @@
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./PokemonDetails.css";
+
 
 const PokemonDetails = () => {
   const { name } = useParams();
   const [pokemon, setPokemon] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -41,7 +45,6 @@ const PokemonDetails = () => {
           alt={pokemon.name}
           className="pokemon_img"
         />
-        
 
         <div className="pokemon_details_props">
           <div className="pokemon_types">
@@ -59,6 +62,10 @@ const PokemonDetails = () => {
           <p className="pokemon_property">Weight: {pokemon.weight}</p>
         </div>
       </div>
+
+      <button className="back_button" onClick={() => navigate("/")}>
+        ⬅ BACK TO POKÉMON LIST
+      </button>
     </div>
   );
 };
