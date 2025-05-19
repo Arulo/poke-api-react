@@ -1,32 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { getMockFilePath } from "./utils/getMockFilePath";
 import { POKEMON_TYPES } from "../src/data/pokemonTypes";
-
-import fs from "fs";
+import { setupApiMocks } from "./utils/setupMocks";
 
 test.beforeEach(async ({ page }) => {
-  // Intercepts all actual API calls
-  await page.route("**/api/v2/**", async (route) => {
-    const url = route.request().url();
-    const filePath = getMockFilePath(url);
-
-    // This will print the files requested, important when interacting with pagination buttons
-    console.log("This is the filePath:", filePath);
-
-    if (filePath && fs.existsSync(filePath)) {
-      // Read mock JSON file from disc
-      const body = fs.readFileSync(filePath, "utf8");
-      // Respond with the previously stored JSON response
-      route.fulfill({ body, contentType: "application/json" });
-    } else {
-      console.warn(`⚠️ No mock data for: ${url}`);
-      route.abort();
-    }
-  });
-
-  // Visit page on each test
+  await setupApiMocks(page);
   await page.goto("");
 });
+
 
 test("Should present header, footer and title tag", async ({ page }) => {
   await expect(page).toHaveTitle(
@@ -47,8 +27,8 @@ test("Should present main components", async ({ page }) => {
 });
 
 test("Should Render Mock Response Pokemon", async ({ page }) => {
-  await expect(page.getByText("bulbasaur")).toBeVisible();
-  await expect(page.getByText("charmeleon")).toBeVisible();
+  await expect(page.getByText("Mock bulbasaur")).toBeVisible();
+  await expect(page.getByText("Mock charmeleon")).toBeVisible();
 });
 
 test("Should allow the user to navigate between pages", async ({ page }) => {
@@ -56,8 +36,8 @@ test("Should allow the user to navigate between pages", async ({ page }) => {
   await expect(page.getByText("NEXT")).toBeEnabled();
   await page.getByText("NEXT").click();
 
-  await expect(page.getByText("wartortle")).toBeVisible();
-  await expect(page.getByText("pikachu")).toBeVisible();
+  await expect(page.getByText("Mock wartortle")).toBeVisible();
+  await expect(page.getByText("Mock pikachu")).toBeVisible();
 
   // Can't validate that "NEXT" is disabled, cause I'm mocking the response
   await expect(page.getByText("PREV")).toBeEnabled();

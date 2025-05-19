@@ -34,9 +34,9 @@ const PokemonDetails = () => {
 
   return (
     <div className="main_wrapper">
-      <div className="pokemon_details_card">
-        <div className="pokeball_watermark" />
-        <h1 className="pokemon_heading">
+      <div className="pokemon_details_card" data-testid='pokemon_details_card'>
+        <div className="pokeball_watermark" data-testid='pokeball_watermark'/>
+        <h1 className="pokemon_heading" data-testid='pokemon_heading'>
           #{pokemon.id} {pokemon.name}
         </h1>
 
@@ -51,7 +51,7 @@ const PokemonDetails = () => {
             {pokemon.types.map((t: any) => (
               <span
                 key={t.type.name}
-                className={`pokemon_type_badge type-${t.type.name}`}
+                className={`pokemon_type_badge type-${t.type.name}`} data-testid={`pokemon_type_badge-${t.type.name}`}
               >
                 {t.type.name}
               </span>
@@ -63,7 +63,7 @@ const PokemonDetails = () => {
         </div>
       </div>
 
-      <button className="back_button" onClick={() => navigate("/")}>
+      <button className="back_button" data-testid="back_button" onClick={() => navigate("/")}>
         ⬅ BACK TO POKÉMON LIST
       </button>
     </div>
