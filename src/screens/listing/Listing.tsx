@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import "./Listing.css";
-import { POKEMON_TYPES } from "../../../src/data/pokemonTypes";
+import { POKEMON_TYPES } from "../../data/pokemonTypes";
+import { Link } from "react-router-dom";
 
 const MAX_OFFSET = 1200;
 
 const Listing = () => {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [filteredPokemon, setFilteredPokemon] = useState([]);
-  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [pokemonList, setPokemonList] = useState<
+    { name: string; url: string }[]
+  >([]);
+  const [filteredPokemon, setFilteredPokemon] = useState<
+    { name: string; url: string }[]
+  >([]);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -45,9 +50,14 @@ const Listing = () => {
       try {
         const allResults = await Promise.all(
           selectedTypes.map(async (typeName) => {
-            const response = await fetch(`https://pokeapi.co/api/v2/type/${typeName}`);
+            const response = await fetch(
+              `https://pokeapi.co/api/v2/type/${typeName}`
+            );
             const data = await response.json();
-            return data.pokemon.map((entry) => entry.pokemon);
+            return data.pokemon.map(
+              (entry: { pokemon: { name: string; url: string } }) =>
+                entry.pokemon
+            );
           })
         );
 
@@ -69,7 +79,7 @@ const Listing = () => {
   }, [selectedTypes]);
 
   // Handler de selección
-  const handleTypeChange = (typeName) => {
+  const handleTypeChange = (typeName: string) => {
     setSelectedTypes((prev) =>
       prev.includes(typeName)
         ? prev.filter((t) => t !== typeName)
@@ -121,7 +131,10 @@ const Listing = () => {
             ))}
           </div>
 
-          <div className="pagination_controls" data-testid="pagination_controls">
+          <div
+            className="pagination_controls"
+            data-testid="pagination_controls"
+          >
             <button
               className="pagination_button"
               onClick={() => setOffset(Math.max(offset - 20, 0))}
@@ -143,8 +156,12 @@ const Listing = () => {
   );
 };
 
-const PokemonCard = ({ pokemonUrl }) => {
-  const [pokemonDetails, setPokemonDetails] = useState(null);
+type PokemonCardProps = {
+  pokemonUrl: string;
+};
+
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonUrl }) => {
+  const [pokemonDetails, setPokemonDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -176,22 +193,29 @@ const PokemonCard = ({ pokemonUrl }) => {
     );
   }
 
+  if (!pokemonDetails) return null;
+
   const types = pokemonDetails.types
-    .map((nested) => nested.type.name)
+    .map((nested: { type: { name: string } }) => nested.type.name)
     .join(", ");
 
   return (
-    <div className="pokemon_card" data-testid="pokemon_card">
-      <img
-        src={pokemonDetails.sprites.front_default}
-        alt={pokemonDetails.name}
-        className="pokemon_card_image"
-      />
-      <h3 className="pokemon_id_and_name">
-        {"#" + pokemonDetails.id} {pokemonDetails.name}
-      </h3>
-      <p className="pokemon_types">{types}</p>
-    </div>
+    <Link
+      to={`/pokemon/${pokemonDetails.name}`}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="pokemon_card" data-testid="pokemon_card">
+        <img
+          src={pokemonDetails.sprites.front_default}
+          alt={pokemonDetails.name}
+          className="pokemon_card_image"
+        />
+        <h3 className="pokemon_id_and_name">
+          {"#" + pokemonDetails.id} {pokemonDetails.name}
+        </h3>
+        <p className="pokemon_types">{types}</p>
+      </div>
+    </Link>
   );
 };
 
