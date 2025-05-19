@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" data-testid="footer">
       <p>
         © 2024 - This project is a personal, non-commercial endeavor created for
         educational and/or recreational purposes. No copyright infringement is
