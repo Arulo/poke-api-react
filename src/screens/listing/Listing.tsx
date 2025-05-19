@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Listing.css";
 import { POKEMON_TYPES } from "../../data/pokemonTypes";
+import { Link } from "react-router-dom";
 
 const MAX_OFFSET = 1200;
 
@@ -199,17 +200,22 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonUrl }) => {
     .join(", ");
 
   return (
-    <div className="pokemon_card" data-testid="pokemon_card">
-      <img
-        src={pokemonDetails.sprites.front_default}
-        alt={pokemonDetails.name}
-        className="pokemon_card_image"
-      />
-      <h3 className="pokemon_id_and_name">
-        {"#" + pokemonDetails.id} {pokemonDetails.name}
-      </h3>
-      <p className="pokemon_types">{types}</p>
-    </div>
+    <Link
+      to={`/pokemon/${pokemonDetails.name}`}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="pokemon_card" data-testid="pokemon_card">
+        <img
+          src={pokemonDetails.sprites.front_default}
+          alt={pokemonDetails.name}
+          className="pokemon_card_image"
+        />
+        <h3 className="pokemon_id_and_name">
+          {"#" + pokemonDetails.id} {pokemonDetails.name}
+        </h3>
+        <p className="pokemon_types">{types}</p>
+      </div>
+    </Link>
   );
 };
 

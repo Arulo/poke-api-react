@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Listing from "./screens/listing/Listing";
-import PokemonDetails from "./screens/details/PokemonDetails"; // Lo vas a crear ahora
+import PokemonDetails from "./screens/details/PokemonDetails";
 
 function App() {
   return (
