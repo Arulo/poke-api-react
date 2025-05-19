@@ -1,12 +1,12 @@
 {
   "results": [
     {
-      "name": "bulbasaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/3"
+      "name": "wartortle",
+      "url": "https://pokeapi.co/api/v2/pokemon/wartortle"
     },
     {
-      "name": "charmeleon",
-      "url": "https://pokeapi.co/api/v2/pokemon/4"
+      "name": "pikachu",
+      "url": "https://pokeapi.co/api/v2/pokemon/pikachu"
     }
   ]
 }

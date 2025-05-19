@@ -121,7 +121,7 @@ const Listing = () => {
             ))}
           </div>
 
-          <div className="pagination_controls">
+          <div className="pagination_controls" data-testid="pagination_controls">
             <button
               className="pagination_button"
               onClick={() => setOffset(Math.max(offset - 20, 0))}
